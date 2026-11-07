@@ -38,24 +38,57 @@ exemption is granted.
 
 ## Installation
 
-Install the bundle into a profile and restart that profile:
+### From GitHub (recommended)
+
+Install the bundle into a profile with the `github:` install-spec shorthand,
+then restart that profile:
 
 ```bash
+dsh plugin --profile <profile> add github:mulqizamzam/mulqi-mp-skills
+```
+
+The CLI runs `pnpm add` in the profile directory and — because `package.json`
+declares `dsh.bundle` → `./cordis.patch.yml` — registers the bundle into
+`dsh.profile.bundles` automatically. No manual manifest editing is needed;
+the patch inserts one mount row that loads this module, whose `apply(ctx)`
+registers the provider.
+
+### From a local checkout
+
+Any install-spec the CLI accepts works: a full git URL, a tarball, or a local
+path.
+
+```bash
+git clone https://github.com/mulqizamzam/mulqi-mp-skills.git
 dsh plugin --profile <profile> add /path/to/mulqi-mp-skills
 ```
 
-`dsh plugin add` resolves the `dsh.bundle.patch` declared in `package.json`
-(`./cordis.patch.yml`), which inserts one mount row. The row loads this module;
-its `apply(ctx)` registers the provider.
-
-Verify the mount without booting:
+### Verify without booting
 
 ```bash
 dsh --profile <profile> --dump-config | grep mulqi-mp-skills
 ```
 
-A mounted row (no `skipping profile bundle` line) confirms the engine pin is
-satisfied and the bundle is wired in.
+A mounted row with no `skipping profile bundle` line confirms the engine pin
+is satisfied and the bundle is wired in. After a profile restart, the boot log
+shows the provider registering the 39 skills from `vendor/skills/`.
+
+### Host version pin
+
+The plugin pins `engines.dsh` to `0.2.1-rc.2` exactly. On a different host
+version the install/activation is refused; grant an exemption only when you
+accept the risk for those exact versions:
+
+```bash
+dsh plugin --profile <profile> allow-version mulqi-mp-skills@0.1.0 \
+  --dsh-version <exact host version> --accept-risk
+```
+
+## Languages
+
+- English: [README.md](README.md)
+- Bahasa Indonesia: [README.id.md](README.id.md)
+- 中文: [README.zh.md](README.zh.md)
 
 ## Usage
 
