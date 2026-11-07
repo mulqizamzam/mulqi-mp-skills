@@ -1,0 +1,14 @@
+# Dependencies
+node_modules/
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# Audit + working artifacts never ship
+audit/
+work/
+*.log
+
+# OS / editor
+.DS_Store
+*.swp

@@ -1,0 +1,10 @@
+# Mulqi MP Skills — Cordis mount layer.
+#
+# Insert one bundle row that loads the `mulqi-mp-skills` module. The module's
+# apply(ctx) registers a single read-only skill provider exposing the bundled
+# skills under vendor/skills/. No existing base rows are replaced; the profile
+# base bundle provides the `@deepseek-ai/dsh-skill` service this plugin uses.
+- insert:
+    - id: mulqi-mp-skills
+      name: 'mulqi-mp-skills'
+      disabled: false

@@ -1,0 +1,40 @@
+{
+  "name": "mulqi-mp-skills",
+  "version": "0.1.0",
+  "description": "Mulqi MP Skills: a native DeepSeek Harness bundle exposing a curated collection of 39 reusable engineering and productivity agent skills as a read-only bundled skill provider.",
+  "type": "module",
+  "main": "./index.js",
+  "exports": {
+    ".": "./index.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "cordis.patch.yml",
+    "LICENSE",
+    "NOTICE.md",
+    "README.md",
+    "docs/**",
+    "vendor/**",
+    "vendor/.gitignore"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": "^22.19.0 || >=24.0.0",
+    "dsh": "0.2.1-rc.2"
+  },
+  "scripts": {
+    "check": "node --check index.js",
+    "test": "node --test tests/*.test.mjs",
+    "verify": "node tests/verify.mjs"
+  },
+  "dependencies": {
+    "yaml": "^2.4.2"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
+}
